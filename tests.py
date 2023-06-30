@@ -46,7 +46,7 @@ def motosTest():
 
     # tendando atribuir o campo venda a um cliente que não existe
     motocicletas.update(placa= 'MOM4321', newdata= {
-        'venda': 2
+        'venda': 5
     } )
 
 
@@ -56,7 +56,9 @@ def motosTest():
 def paymentsTest():
     
     pagamentos.emit(cliente= 1, produto= 2, valor= 1.00, tipo_pagamento= 'à vista', parcela= 1, total_parcelas= 1)
-    pagamentos.emit(cliente= 5, produto= 3, valor= 1.00, tipo_pagamento= 'à vista', parcela= 1, total_parcelas= 1) # tentando emitir um pagamento com dados incongruentes com a tabela "motocicletas"
+    pagamentos.emit(cliente= 5, produto= 3, valor= 1.00, tipo_pagamento= 'à vista', parcela= 1, total_parcelas= 1) 
+    # tentando emitir um pagamento com dados incongruentes com a tabela "motocicletas"
+    # o cliente 5 não existe e muito menos comprou o produto 3
     print( pagamentos.get(clientId= 1), '\n' ) # id do cliente
     pagamentos.update(id= 1, sit= 'pago') # id do pagamento
 
@@ -65,6 +67,8 @@ def paymentsTest():
 
 
 clientTest()
+os.system('cls')
 motosTest()
-paymentsTest()
+#os.system('cls')
+#paymentsTest()
 

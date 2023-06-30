@@ -11,11 +11,16 @@ class CRUD:
                         int(nome_arquivo[0:len(nome_arquivo)-5])
                         with open(complete_path+nome_arquivo) as arquivo:
                             i = json.load(arquivo)
-                            print(i)
                             if i not in self._data:
                                 self._data.append(i)
                     #except:
                         #pass
+        else:
+            if os.path.exists('src'):
+                os.makedirs(complete_path)
+            else:
+                os.makedirs('src')
+                os.makedirs(complete_path)
 
 
     def insert(self, **kwargs):
@@ -24,11 +29,6 @@ class CRUD:
         content['id'] = entry_id
         if self._validate(content) and content not in self._data:
             self._data.append(content)
-            if not os.path.exists('src'):
-                os.makedirs('src')
-                os.makedirs('client')
-                os.makedirs('motocicletas')
-                os.makedirs('pagamentos')
             self.save_to_json(content)
         else:
             print(f'Error creating {content}')
