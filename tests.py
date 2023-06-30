@@ -1,4 +1,4 @@
-from crud import *
+from crud_json import *
 
 
 def clientTest():
@@ -9,9 +9,11 @@ def clientTest():
     client.update(old_cpf= 12345678900, newdata= {
         'nome': 'ana'
     })
+
     client.delete(cpf= 12345678000)
-    cursor.execute("SELECT * FROM clientes")
-    print( cursor.fetchall() )
+
+
+    print(client._data)
 
 
 def motosTest():
@@ -20,12 +22,13 @@ def motosTest():
     motocicletas.insert(fabricante= 'Suzuki', modelo= 'DADA3', placa= 'MOM4321', preço= 1.00)
     print(
         # retorna os resultados, deve retornar um array vazio
-        motocicletas.get(fabricante= 'Honda', modelo= 'DADA', placa= 'DAD1234', preço= '<= 5', venda= True)
+        motocicletas.get(fabricante= 'Honda', modelo= 'DADA', placa= 'DAD1234', preço= 5, venda= True)
         # venda= True: retorna todos que possuem um campo 'venda' não nulo
         # venda= False: retorna todos que possuem um campo 'venda' nulo
         # venda= Inteiro: retorna todos vendidos ao id (cliente) informado
     )
 
+    print('*'*100, '\n\n\n')
     motocicletas.update(placa= 'DAD1234', newdata= {
         'preço': 2.00
     } )
@@ -34,7 +37,7 @@ def motosTest():
     } )
     print(
         # retorna os resultados, deve retornar 1 resultado agora
-        motocicletas.get(fabricante= 'Honda', modelo= 'DADA', placa= 'DAD1234', preço= '<= 5', venda= True)
+        motocicletas.get(fabricante= 'Honda', modelo= 'DADA', placa= 'DAD1234', preço= 5, venda= True)
     )
     motocicletas.delete(placa= 'DAD1234')
     motocicletas.update(placa= 'MOM1234', newdata= {
@@ -43,21 +46,25 @@ def motosTest():
 
     # tendando atribuir o campo venda a um cliente que não existe
     motocicletas.update(placa= 'MOM4321', newdata= {
-        'venda': 5
+        'venda': 2
     } )
 
-    cursor.execute("SELECT * FROM motocicletas")
-    print( cursor.fetchall() )
+
+    print(motocicletas._data, '\n')
 
 
 def paymentsTest():
-    pagamentos.emit(clienteId= 1, produto= 2, valor= 1.00, tipo= 'à vista', parcela= 1, total= 1)
-    pagamentos.emit(clienteId= 2, produto= 3, valor= 1.00, tipo= 'à vista', parcela= 1, total= 1) # tentando emitir um pagamento com dados incongruentes com a tabela "motocicletas"
-    print( pagamentos.get(clientId= 1) ) # id do cliente
+    
+    pagamentos.emit(cliente= 1, produto= 2, valor= 1.00, tipo_pagamento= 'à vista', parcela= 1, total_parcelas= 1)
+    pagamentos.emit(cliente= 5, produto= 3, valor= 1.00, tipo_pagamento= 'à vista', parcela= 1, total_parcelas= 1) # tentando emitir um pagamento com dados incongruentes com a tabela "motocicletas"
+    print( pagamentos.get(clientId= 1), '\n' ) # id do cliente
     pagamentos.update(id= 1, sit= 'pago') # id do pagamento
-    cursor.execute("SELECT * FROM pagamentos")
-    print( cursor.fetchall() )
 
 
+    print(pagamentos._data)
 
+
+clientTest()
+motosTest()
+paymentsTest()
 

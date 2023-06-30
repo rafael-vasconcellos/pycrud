@@ -245,3 +245,10 @@ client = Clients()
 motocicletas = Motos()
 pagamentos = Payments()
 
+
+# Anotações para teste
+#cursor.execute("SELECT * FROM clientes")
+#print( cursor.fetchall() )
+
+#pagamentos.emit(clienteId= 1, produto= 2, valor= 1.00, tipo= 'à vista', parcela= 1, total= 1)
+# preço= '<= 5'  sqlite version
