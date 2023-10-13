@@ -1,3 +1,6 @@
+# aqui há uma classe chamada "CRUD", que é uma abstração das funcionalidades de CRUD 
+# que serão herdadas pelas subclasses, estas que também acrescentam suas particularidades
+
 import json, os
 
 class CRUD:

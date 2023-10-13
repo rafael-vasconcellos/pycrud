@@ -1,5 +1,6 @@
-from crud_json import *
+# testes automátizados
 
+from crud_json import *
 
 def clientTest():
     client.insert(nome= 'rafael', cpf= 12345678910)
@@ -36,12 +37,12 @@ def motosTest():
         'venda': 1  # cliente de id 1
     } )
     print(
-        # retorna os resultados, deve retornar 1 resultado agora
+        # a exata mesma consulta, deve retornar 1 resultado agora
         motocicletas.get(fabricante= 'Honda', modelo= 'DADA', placa= 'DAD1234', preço= 5, venda= True)
     )
     motocicletas.delete(placa= 'DAD1234')
     motocicletas.update(placa= 'MOM1234', newdata= {
-        'venda': 1
+        'venda': 1 # atribuindo o produto de placa 'MOM1234' como vendido ao cliente 1
     } )
 
     # tendando atribuir o campo venda a um cliente que não existe
@@ -67,8 +68,8 @@ def paymentsTest():
 
 
 clientTest()
-os.system('cls')
+#os.system('cls')
 motosTest()
 #os.system('cls')
-#paymentsTest()
+paymentsTest()
 
